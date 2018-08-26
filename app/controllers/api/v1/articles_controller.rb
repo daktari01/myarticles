@@ -17,6 +17,11 @@ module Api
                     render json: {status: 'ERROR', message:'Article not saved', data:article.errors}, status: :unprocessable_entry
                 end
             end
+            def destroy
+                article = Article.find(params[:id])
+                article.destroy
+                render json: {status: 'SUCCESS', message:'Article deleted', data:article}, status: :ok
+            end
             private def article_params
                 params.permit(:title, :body)
             end
